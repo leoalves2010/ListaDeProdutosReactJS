@@ -1,5 +1,6 @@
 import React from "react";
 import { Channel } from "../../data/services/EventService";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function ProductItem({ products = [] }) {
     function remove(productId) {
@@ -8,20 +9,31 @@ export default function ProductItem({ products = [] }) {
 
     return (
         <ul className="product-list">
-            {products.map((product) => (
-                <li key={product.id} className="product-list-item">
-                    <button
-                        onClick={() => {
-                            remove(product.id);
-                        }}
+            <TransitionGroup>
+                {products.map((product) => (
+                    <CSSTransition
+                        key={product.id}
+                        timeout={300}
+                        classNames={'product'}
                     >
-                        X
-                    </button>
-                    <img src={product.image} alt={product.description} />
-                    <div>{product.description}</div>
-                    <div>{product.price}</div>
-                </li>
-            ))}
+                        <li className="product-list-item">
+                            <button
+                                onClick={() => {
+                                    remove(product.id);
+                                }}
+                            >
+                                X
+                            </button>
+                            <img
+                                src={product.image}
+                                alt={product.description}
+                            />
+                            <div>{product.description}</div>
+                            <div>{product.price}</div>
+                        </li>
+                    </CSSTransition>
+                ))}
+            </TransitionGroup>
         </ul>
     );
 }
