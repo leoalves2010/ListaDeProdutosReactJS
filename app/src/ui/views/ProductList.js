@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ProductService } from "../../data/services/ProductService";
 import { Channel } from "../../data/services/EventService";
-import ProductItem from "./ProductItem";
+import ProductItem from "../components/ProductItem";
 
 export default function ProductList() {
     const [products, setProducts] = useState([]);

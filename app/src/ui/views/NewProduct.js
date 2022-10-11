@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { ProductService } from "../../data/services/ProductService";
+import { useNavigate } from "react-router-dom";
 
 export default function NewProduct() {
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(0);  
+    const navigate = useNavigate();  
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -23,7 +25,8 @@ export default function NewProduct() {
         setDescription("");
         setPrice(0);
 
-        return await ProductService.create(newProduct);
+        await ProductService.create(newProduct);
+        navigate("/list");
     }
 
     return (
