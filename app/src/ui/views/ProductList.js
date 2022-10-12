@@ -14,7 +14,7 @@ export default function ProductList() {
         return () => {
             Channel.removeListener("product:remove", remove);
         };
-    });
+    }, []);
 
     async function startData() {
         const products = await ProductService.listAll();
@@ -27,7 +27,7 @@ export default function ProductList() {
         );
         await ProductService.remove(productId);
         products.splice(productIndex, 1);
-        setProducts(products);
+        startData();
     }
 
     return (

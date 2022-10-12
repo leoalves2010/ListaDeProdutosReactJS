@@ -1,7 +1,14 @@
+import React from "react";
 import "./App.css";
-import NewProduct from "./ui/views/NewProduct";
-import ProductList from "./ui/views/ProductList";
 import { Routes, Route, Link } from "react-router-dom";
+import loadable from "@loadable/component";
+
+const NewProduct = loadable(() => import("./ui/views/NewProduct"), {
+    fallback: <h1>Carregando a página 'Novos Produtos'. Aguarde...</h1>,
+});
+const ProductList = loadable(() => import("./ui/views/ProductList"), {
+    fallback: <h1>Carregando a página 'Listagem de Produtos'. Aguarde...</h1>,
+});
 
 function App() {
     return (
