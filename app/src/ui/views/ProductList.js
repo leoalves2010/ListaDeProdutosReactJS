@@ -8,7 +8,7 @@ export default function ProductList() {
 
     useEffect(() => {
         startData();
-
+        
         Channel.on("product:remove", remove);
 
         return () => {
