@@ -10,23 +10,24 @@ export default function NewProduct() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        if(image !== "" && description !== ""){
+            const newProduct = {
+                image,
+                description,
+                price,
+            };
+    
+            if (!newProduct.image && !newProduct.description && !newProduct.price) {
+                return false;
+            }
 
-        const newProduct = {
-            image,
-            description,
-            price,
-        };
-
-        if (!newProduct.image && !newProduct.description && !newProduct.price) {
-            return false;
+            setImage("");
+            setDescription("");
+            setPrice(0);
+    
+            await ProductService.create(newProduct);
+            navigate("/list");
         }
-
-        setImage("");
-        setDescription("");
-        setPrice(0);
-
-        await ProductService.create(newProduct);
-        navigate("/list");
     }
 
     return (
